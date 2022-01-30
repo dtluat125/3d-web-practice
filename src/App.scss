@@ -1,0 +1,162 @@
+@import "~antd/dist/antd.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  // cursor: url('../public/ani1133.ani'), url('../public/ani1133.png'), auto;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  align-items: center;
+  min-height: 100vh;
+  position: fixed;
+  width: 100%;
+  z-index: 2;
+}
+
+.container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  perspective: 1000px;
+}
+.card {
+  min-height: 80vh;
+  width: 80%;
+  max-width: 35rem;
+  border-radius: 30px;
+  padding: 0rem 5rem;
+  box-shadow: 0 20px 20px rgba(0, 0, 0, 0.2), 0px 0px 50px rgba(0, 0, 0, 0.2);
+  transform-style: preserve-3d;
+  user-select: none;
+}
+
+.profile-picture {
+  transform-style: preserve-3d;
+  min-height: 35vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.profile-picture img {
+  height: 15rem;
+  z-index: 2;
+  transition: all 0.75s ease-out;
+}
+.circle {
+  width: 15rem;
+  height: 15rem;
+  background: linear-gradient(
+    to right,
+    rgba(124, 212, 250, 0.75),
+    rgba(225, 249, 236)
+  );
+  position: absolute;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.info {
+  transform-style: preserve-3d;
+}
+
+.info h2 {
+  font-size: 2rem;
+  transition: all 0.75s ease-out;
+}
+.info h3 {
+  font-size: 1rem;
+  padding: 2rem 0rem;
+  color: #585858;
+  font-weight: lighter;
+  transition: all 0.75s ease-out;
+}
+.sizes {
+  display: flex;
+  transition: all 0.75s ease-out;
+  column-gap: 0.7rem;
+}
+.sizes button {
+  padding: 0.8rem 1rem;
+  background: none;
+  border: none;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 30px;
+  // cursor: url('../public/ani1135.ani'), url('../public/ani1135.png'), auto;
+  cursor: pointer;
+  font-weight: bold;
+  color: #585858;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.082);
+  }
+}
+button.active {
+  background: #585858;
+  color: white;
+}
+.purchase {
+  margin-top: 5rem;
+  transition: all 0.75s ease-out;
+  transform-style: preserve-3d;
+}
+
+.purchase button {
+  width: 100%;
+  padding: 1rem 0rem;
+  background: linear-gradient(
+    to right,
+    rgba(225, 249, 236),
+    rgba(124, 212, 250, 0.75)
+  );
+  border: none;
+  color: white;
+  // cursor: url('../public/ani1135.ani'), url('../public/ani1135.png'), auto;
+  cursor: pointer;
+  border-radius: 30px;
+  font-weight: bolder;
+  transition: all 0.3s ease;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+  &:hover {
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.2);
+    transform: translateZ(20px);
+  }
+  // &:active {
+  //   transform: scale(1.1);
+  // }
+}
+
+.all-container {
+  width: 100%;
+  min-height: 100vh;
+}
+@media (max-height: 928px) {
+  .profile-picture img {
+    height: 10rem;
+  }
+  .circle {
+    width: 10rem;
+    height: 10rem;
+  }
+  .purchase {
+    margin-top: 2rem;
+  }
+  .info h3 {
+    font-size: 1rem;
+    padding: 1.5rem 0rem;
+  }
+  .card {
+    min-height: 90vh;
+  }
+  h2 {
+    margin-bottom: 0.2rem;
+  }
+}
