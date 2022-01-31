@@ -1,0 +1,68 @@
+.slider-container {
+  --progress-bar-height: 36px;
+  --progress-bar-width: 218px;
+}
+
+.slider-container {
+  position: relative;
+  width: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* Background */
+.slider-container::before {
+  content: "";
+  background-color: rgb(255, 226, 173);
+  width: 99%;
+  height: calc(var(--progress-bar-height) - 1px);
+  display: block;
+  position: absolute;
+  //   border-radius: 18px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+/* Custom Progress Bar */
+.progress-bar-cover {
+  background-color: rgb(213, 190, 147);
+  width: 0%;
+  height: var(--progress-bar-height);
+  display: block;
+  position: absolute;
+  //   border-radius: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+.progress-bar-hover-cover {
+  background-color: rgba(213, 190, 147, 0.481);
+  width: 0%;
+  height: var(--progress-bar-height);
+  display: block;
+  position: absolute;
+  //   border-radius: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  user-select: none;
+  pointer-events: none;
+}
+
+/*  Hide Original */
+.range {
+  -webkit-appearance: none;
+  background-color: rgba(240, 9, 9, 0.397);
+  height: 36px;
+  width: 100%;
+  cursor: pointer;
+  opacity: 0;
+  margin: 0 auto;
+  padding: 10px;
+  z-index: 99;
+}

@@ -8,6 +8,7 @@ import { useAudio } from "../../hooks/audioHook";
 import PlayButton from "../PlayButton";
 import "./book.scss";
 import myPic from "../../assets/images/mypic.png";
+import AudioPlayer from "../AudioPlayer/AudioPlayer";
 
 function Book2(props) {
   const {
@@ -25,7 +26,7 @@ function Book2(props) {
   } = props;
 
   const pageRender = (div, index) => {
-    const { url, description, question, title } = div;
+    const { titleFront, titleBack, charInfo, dailyNote, audio, stickers } = div;
     if (index === 0)
       return (
         <>
@@ -34,6 +35,9 @@ function Book2(props) {
               <h1>Ký sự năm 2021</h1>
               {/* <p>Tác giả</p>
               <p>Luat Dang</p> */}
+              <div className="sticker-container">
+                <img src="sticker-girl1.png" alt="" />
+              </div>
             </div>
           </div>
           <div class="back">
@@ -57,6 +61,14 @@ function Book2(props) {
                     className="book-button"
                   />
                 </div>
+                <div className="icons">
+                  <div className="icon-container">
+                    <img src="sticker-banhbao1.png" alt="" />
+                  </div>
+                </div>
+                <div className="notes">
+                  <div className="title">Lat sach tu tu thoi khong lag!</div>
+                </div>
               </div>
             </div>
           </div>
@@ -65,7 +77,7 @@ function Book2(props) {
     if (index === data.length - 1)
       return (
         <>
-          <div class="front">
+          <div class="front last">
             <div id="f1" class="front-content">
               <h1>The end</h1>
             </div>
@@ -73,6 +85,10 @@ function Book2(props) {
           <div class="back last">
             <div id="b1" class="back-content ">
               <h1>made by Luat dzai</h1>
+              <div className="sticker-container">
+                <img src="sticker-girl2.png" alt="" />
+              </div>
+              <div className="small-note">iu ban!</div>
             </div>
           </div>
         </>
@@ -81,60 +97,119 @@ function Book2(props) {
       <>
         <div class="front">
           <div id="f1" class="front-content">
-            <div className="title-container">Nhân vật</div>
-            <div className="content-container">
-              <div className="char-intro">
-                <div className="line-container">
-                  <div className="name">
-                    <div className="des">
-                      <strong>Chị mình</strong>
-                    </div>
-                    <img src={url} alt="" />
-                  </div>
-                  <div className="description">
-                    Một người quen qua mạng, nhân vật chính của cuốn ký sự
-                  </div>
-                </div>
-                <div className="line-container">
-                  <div className="name">
-                    <div className="des">
-                      <strong>Mình</strong>
-                    </div>
-                    <img src={myPic} alt="" />
-                  </div>
-                  <div className="description">Một người già</div>
+            <div className="title-container">{titleFront || ""}</div>
+            {charInfo?.length && (
+              <div className="content-container">
+                <div className="char-intro">
+                  {charInfo?.map((char, index) => {
+                    const { name, des, url } = char;
+                    return (
+                      <div className="line-container" key={index}>
+                        <div className="name">
+                          <div className="des">
+                            <strong>{name || ""}</strong>
+                          </div>
+                          <img src={url || ""} alt="" />
+                        </div>
+                        <div className="description">{des || ""}</div>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
-            </div>
+            )}
+            {dailyNote
+              ?.filter((note) => !note.back)
+              ?.map((note, index) => {
+                const { dayTitle, dayContent } = note;
+                return (
+                  <div key={index}>
+                    <div className="ques-container">{dayTitle}</div>
+                    <div className="content-container">
+                      {dayContent?.map((content, index) => (
+                        <div className="line" key={index}>
+                          {content}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            {audio?.length > 0 &&
+              audio
+                ?.filter((au) => !au.back)
+                .map((au, index) => {
+                  const { url } = au;
+                  return (
+                    <div className="audio-section">
+                      <AudioPlayer
+                        url={url}
+                        toggle={toggle}
+                        playing={playing}
+                        setIsPlayingOuter={setIsPlaying}
+                      />
+                    </div>
+                  );
+                })}
+            {stickers?.length > 0 &&
+              stickers
+                ?.filter((sticker) => !sticker.back)
+                .map((sticker, index) => {
+                  const { url } = sticker;
+                  return (
+                    <div className="sticker-container">
+                      <img src={url} alt="sticker" />
+                    </div>
+                  );
+                })}
           </div>
         </div>
         <div class="back">
           <div id="b1" class="back-content">
-            <div className="ques-container">Hà Nội, 13/02/2021</div>
-            <div className="content-container">
-              <div className="line">
-                Một ngày trời không mưa nhưng se lạnh. Nhiệt độ cao nhất 22-25
-                độ, thấp nhất 14-17 độ. Hôm nay là lần đầu tiên mình giao tiếp
-                với chị mình kiểu dài dài and rất zui zẻ. Tầm này năm ngoái chị
-                mình đang bị ốm cúm, tay chân cũng hay lạnh, đầu cũng hay đau,
-                nghe thương lắm ấy, cũng may có một gentleman như mình bầu bạn.
-              </div>
-            </div>
-            <div className="ques-container">Hà Nội, 14/02/2021</div>
-            <div className="content-container">
-              <div className="line">
-                Thời tiết hôm nay cũng giống hôm qua, and tâm trạng của mình
-                cũng vậy - rất zui :3. Hôm nay mình được chị hôm qua bank mừng
-                tủi, lại còn tặng mình mấy cái sicula icon nữa, cảm động!.. Cuộc
-                trò chuyện hôm nay chủ yếu về đồ tàu và mấy bạn nữ xink xink,
-                rất tuyệt! (Trên đây là câu chuyện từ đầu ngày đến 3-4 giờ sáng)
-              </div>
-              <div className="line">
-                Cũng trong ngày hôm nay nma tầm 10 giờ tối, bệnh tình của chị
-                diễn biến xấu nên mình an ủi rồi để chị ngủ sớm. Chị yên giấc
-                vào đầu ngày mới.
-              </div>
-            </div>
+            {dailyNote
+              ?.filter((note) => note.back)
+              ?.map((note, index) => {
+                const { dayTitle, dayContent } = note;
+                return (
+                  <div key={index}>
+                    <div className="ques-container">{dayTitle}</div>
+                    <div className="content-container">
+                      {dayContent?.map((content, index) => (
+                        <div className="line" key={index}>
+                          {content}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            {audio?.length > 0 &&
+              audio
+                ?.filter((au) => au.back)
+                .map((au, index) => {
+                  const { url } = au;
+                  return (
+                    <div className="audio-section">
+                      <AudioPlayer
+                        url={url}
+                        toggle={toggle}
+                        playing={playing}
+                        setIsPlayingOuter={setIsPlaying}
+                      />
+                    </div>
+                  );
+                })}
+            {stickers?.length > 0 &&
+              stickers
+                ?.filter((sticker) => sticker.back)
+                .map((sticker, index) => {
+                  const { url } = sticker;
+                  return (
+                    <div className="sticker-container">
+                      <img src={url} alt="sticker" />
+                    </div>
+                  );
+                })}
           </div>
         </div>
       </>

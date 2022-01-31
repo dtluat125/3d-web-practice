@@ -60,6 +60,21 @@
         display: flex;
         align-items: center;
       }
+      .icons {
+        .icon-container {
+          img {
+            width: 100px;
+            height: auto;
+          }
+        }
+      }
+      .notes {
+        position: absolute;
+        bottom: 10px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.5em;
+      }
     }
 
     .front-content {
@@ -112,12 +127,24 @@
     //   rgba(0, 0, 0, 0) 35%,
     //   rgba(200, 160, 0, 0.1) 65%
     // );
+    padding: 10px;
     &.first,
-    &.last {
+    &:not(.front).last {
       background-color: rgb(252, 209, 128);
       background-image: none;
       .front-content {
         justify-content: center;
+      }
+      .back-content {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 0.5rem;
+        .small-note{
+          position: absolute;
+          bottom: -10px;
+          right: 0;
+        }
       }
       // background: repeating-linear-gradient(white, white 25px, #3d3d3d 26px, #777777 27px);
       &::after {
@@ -152,10 +179,24 @@
     left: 0;
     transform-origin: left;
     transition: transform 1s;
-    .back-content {
+    .back-content,
+    .front-content {
       padding: 0 10px;
       .ques-container {
         color: rgb(48, 142, 163);
+      }
+    }
+    .audio-section {
+      margin: 10px 0;
+      width: 100%;
+    }
+    .sticker-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+      img {
+        max-width: 150px;
       }
     }
   }
@@ -163,6 +204,20 @@
   .front {
     z-index: 1;
     backface-visibility: hidden;
+    &.last {
+      display: flex;
+      .front-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      align-items: center;
+    }
+    &.first {
+      .front-content {
+        color: #308ea3;
+      }
+    }
   }
 
   .back {
@@ -182,7 +237,6 @@
       display: flex;
       flex-direction: column;
       padding: 20px 0;
-
     }
   }
 

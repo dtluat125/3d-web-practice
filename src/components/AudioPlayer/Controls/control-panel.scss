@@ -1,0 +1,28 @@
+.control-panel {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  width: 100%;
+  z-index: 99;
+  align-items: center;
+  pointer-events: none;
+  .btn-custom-container {
+    pointer-events: auto;
+  }
+}
+
+.timer {
+  font-size: 10px;
+  font-weight: 200;
+  color: black;
+  background-color: white;
+  border-radius: 11.5px;
+  height: 23px;
+  width: 41px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 6px;
+}

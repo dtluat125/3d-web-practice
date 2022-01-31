@@ -62,6 +62,7 @@ function Recap() {
   const [secretModalOpen, setSecretModalOpen] = useState(false);
   const [loggedIn, setLoggedIn] = useState(false);
   const [showSecretContent, setShowSecretContent] = useState(false);
+  const [isModalLoading, setIsModalLoading] = useState(false);
 
   const createBox = (...boxs) => {
     return boxs.map((box, index) => {
@@ -81,6 +82,7 @@ function Recap() {
           lastIndex={index === boxs.length - 2}
           setWarning={setWarning}
           setSecretModalOpen={setSecretModalOpen}
+          setIsModalLoading={setIsModalLoading}
         />
       );
     });
@@ -165,10 +167,13 @@ function Recap() {
         setShowSecretContent(true);
       }, 500);
   }, [loggedIn]);
+  const pass = '17082002'
   const onSubmit = () => {
-    if (process.env.REACT_APP_SECRET_KEY === password) {
+    if (pass === password) {
       setLoggedIn(true);
       toastInformSuccess("Access granted!");
+      setIsModalLoading(true);
+      setTimeout(() => setIsModalLoading(false), 2000);
       return;
     }
     toastError("Please try again, wrong passcode!");
@@ -225,6 +230,7 @@ function Recap() {
 
   return (
     <div className={`recap-container ${hover ? "cursor-pointer" : ""}`}>
+      {isModalLoading && loggedIn && <FirstLoader />}
       {secretModalOpen && (
         <Modal
           footer={null}
@@ -246,9 +252,214 @@ function Recap() {
             <SecretSection
               data={[
                 { question: "", url: "", description: "" },
-                {},
-                { question: "", url: pic3, description: "This is pic3" },
-                { question: "", url: pic5, description: "This is pic5" },
+                {
+                  titleFront: "Nhân vật",
+                  charInfo: [
+                    {
+                      name: "Chị mình",
+                      des: "Một chuyên văn sâu sắc",
+                      url: profilePic2,
+                    },
+                    {
+                      name: "Mình",
+                      des: "Một người già",
+                      url: myPic,
+                    },
+                  ],
+                  titleBack: "",
+                  dailyNote: [
+                    {
+                      dayTitle: "13/02/2021",
+                      dayContent: [
+                        "Một ngày trời Hà Nội không mưa nhưng se lạnh. Nhiệt độ cao nhất 22-25 độ, thấp nhất 14-17 độ. Hôm nay là lần đầu tiên mình giao tiếp với chị mình kiểu dài dài and rất zui zẻ. Tầm này năm ngoái chị mình đang bị ốm cúm, tay chân hay lạnh, đầu cũng hay đau, nghe thương lắm ấy, cũng may có một gentleman như mình bầu bạn.",
+                      ],
+                      back: true,
+                    },
+                    {
+                      dayTitle: "14/02/2021",
+                      dayContent: [
+                        "Thời tiết hôm nay cũng giống hôm qua, and tâm trạng của mình cũng vậy. Hôm nay mình được chị hôm qua bank mừng tủi, lại còn tặng mình mấy cái sicula icon nữa, cảm động!.. Cuộc trò chuyện hôm nay chủ yếu về ẩm thực trung hoa và các mỹ nữ vùng cao, rất tuyệt!",
+                        "Đêm nay, chị mình cứ kêu chán nma bệnh tình của chị diễn biến xấu nên mình an ủi rồi để chị ngủ sớm. Chị yên giấc vào đầu ngày mới TT.",
+                      ],
+                      back: true,
+                    },
+                  ],
+                },
+                {
+                  dailyNote: [
+                    {
+                      dayTitle: "Đêm 15 rạng sáng 16",
+                      dayContent: [
+                        "Hôm nay chị mình kiểu siêu chán nên rủ mình chơi game nhưng vào game thì cổ giật lag xong không chơi được. Mình và đồng đội kiểu vương quốc thiếu vắng nụ cười :). Nhưng mình vẫn tha thứ cho cổ vì mấy cái voice siêu cute :>",
+                      ],
+                      back: false,
+                    },
+                    {
+                      dayTitle: "Đêm 16 rạng sáng 17",
+                      dayContent: [
+                        "Cuối cùng cũng đợi được đến ngày chơi game cùng bà chị, một buổi tối khá zui zẻ, thua thì vẫn thua nma zui thì vẫn zui :D. Hôm nay mình có trải lòng một chút với mấy người đồng đội nên bà chị chờ mình hơi lâu :>",
+                        "Sau đó chúng mình có cuộc trò chuyện rất zui và bổ ích về kinh nghiệm tình trường của cổ :).",
+                      ],
+                      back: true,
+                    },
+                  ],
+                  audio: [
+                    {
+                      url: "mascara.mp4",
+                      back: false,
+                    },
+                    {
+                      url: "mattroi.mp4",
+                      back: false,
+                    },
+                    {
+                      url: "braytrongthanhpho.mp4",
+                      back: false,
+                    },
+                  ],
+                  stickers: [
+                    {
+                      url: "sticker-meo.png",
+                      back: true,
+                    },
+                    {
+                      url: "sticker-bunny1.png",
+                      back: false,
+                    },
+                  ],
+                },
+                {
+                  dailyNote: [
+                    {
+                      dayTitle: "Ngày 17 sau khi mình tỉnh giấc",
+                      dayContent: [
+                        "Hôm nay hơi trầm lắng một chút..",
+                        "Bọn mình có tâm sự một chút về chuyện học hành...",
+                        "Đêm nay chúng ta đi ngủ rất sớm hehe.",
+                      ],
+                      back: false,
+                    },
+                    {
+                      dayTitle: "Ngày 18 and rạng sáng ngày 19",
+                      dayContent: [
+                        "Hôm nay chị mình đi date với bồ cũ, cậy được đi chơi nên trêu mình ác..",
+                        "Đi chơi về xong vẫn trêu :)",
+                        "Cả ngày hôm nay ta chỉ trêu nhau xong dỗ, bcuoi vl :>, được cái bà chị xin lỗi cũng thành tâm nên mình tha thứ đấy!",
+                      ],
+                      back: true,
+                    },
+                  ],
+                  stickers: [
+                    {
+                      url: "sticker-banhbao3.png",
+                      back: false,
+                    },
+                    {
+                      url: "sticker-gau.webp",
+                      back: true,
+                    },
+                  ],
+                  audio: [
+                    {
+                      url: "creep.mp4",
+                      back: true,
+                    },
+                    {
+                      url: "thanhxuan.mp4",
+                      back: true,
+                    },
+                  ],
+                },
+                {
+                  dailyNote: [
+                    {
+                      dayTitle: "Đêm 19 rạng sáng 20",
+                      dayContent: [
+                        "Hôm nay là một ngày zui, chị em mình trêu nhau như mọi khi.",
+                        "Chả hiểu sao nma bà chị hôm nay có vẻ đáng iu hơn mọi hôm..",
+                      ],
+                      back: false,
+                    },
+                    {
+                      dayTitle: "20/02/2021",
+                      dayContent: [""],
+                      back: true,
+                    },
+                    {
+                      dayTitle: "...",
+                      back: true,
+                    },
+                    {
+                      dayTitle: "17/08/2021",
+                      dayContent: [
+                        "Nay sinh nhật bà chị, tôi có bank mừng tuổi bả hehe",
+                      ],
+                      back: true,
+                    },
+                    {
+                      dayTitle: "...",
+                      back: true,
+                    },
+                    {
+                      dayTitle: "Đêm 30/12/2021, rạng sáng 31/12/2021",
+                      dayContent: [
+                        "Lâu rồi mới nói chuyện lại với bà chị, cũng rất zui hi",
+                        "Hôm nay còn xem film chung cơ, thật là không ai ngờ!!",
+                        "...",
+                        "Mình rất thắc mắc tại sao một người có thể đáng iu lâu đến z!??",
+                      ],
+                      back: true,
+                    },
+                  ],
+                  audio: [
+                    {
+                      url: "chucbengungon.mp4",
+                      back: false,
+                    },
+                  ],
+                  stickers: [
+                    {
+                      url: "sticker-banhbao4.png",
+                      back: false,
+                    },
+                  ],
+                },
+                {
+                  dailyNote: [
+                    {
+                      dayTitle: "31/01/2022 dương lịch (tức 29 tết)",
+                      dayContent: [
+                        "Nếu bà chị có đang đọc những dòng này thì chắc hẳn là ngày hôm nay rồi vì tôi tính z mà!",
+                        "",
+                        "Đây không hẳn là thể ký trong văn học nma nghe ký sự nghe nó nghiêm túc hơn đúng hok!? Đừng bắt bẻ nka!",
+                        "Vài lời nhắn nhủ đến bà chị nè:",
+                        "Đầu tiên thì xin chân thành cám ơn bà chị, sự xuất hiện của bà chị có thể nói là một trong những yếu tố bước ngoặt trong năm 2021 của tôi. Tất nhiên bước ngoặt theo hướng rất tích cực nên tôi rất biết ơn bà chị!",
+                        "Tiếp đến là lời chúc sức khỏe, sang thềm năm mới rồi, mong bà chị sau này vẫn luôn zui tươi như những đóa hoa nhé!!",
+                      ],
+                      back: false,
+                    },
+                    {
+                      dayTitle: "Gác bút",
+                      dayContent: [
+                        "Chúc mừng năm mớii!!",
+                        "Bà chị đáng iu lắmm!",
+                      ],
+                      back: true,
+                    },
+                  ],
+                  stickers: [
+                    {
+                      url: "sticker-tho1.png",
+                      back: true,
+                    },
+                  ],
+                  audio: [
+                    {
+                      url: "flower.mp4",
+                      back: true,
+                    },
+                  ],
+                },
                 { question: "", url: "", description: "" },
               ]}
               setIsPlaying={setIsPlaying}
@@ -258,115 +469,111 @@ function Recap() {
           )}
         </Modal>
       )}
-      {isLoading ? (
-        <FirstLoader />
-      ) : (
-        <div className="">
-          {isModalOpen && (
-            <Modal
-              width="100%"
-              height="calc(100vh - 100px) "
-              footer={null}
-              visible={isModalOpen}
-              destroyOnClose
-              closable
-              className="modal-video"
-              onCancel={handleCloseModal}
-              centered
-            >
-              <RightOutlined
-                className={`right-icon ${
-                  currentIndex[boxIndex] >= videoUrl.length - 1
-                    ? "disabled"
-                    : ""
-                }`}
-                role="button"
-                onClick={() => {
-                  if (currentIndex[boxIndex] > videoUrl.length - 1) return;
-                  goNextPage();
-                }}
-              />
-              <LeftOutlined
-                className={`left-icon ${
-                  currentIndex[boxIndex] <= 0 ? "disabled" : ""
-                }`}
-                role="button"
-                onClick={() => {
-                  if (currentIndex[boxIndex] < 0) return;
-                  goPrevPage();
-                }}
-              />
-              <div className="dots-group">
-                {videoUrl.map((video, index) => (
-                  <div
-                    className={`dot ${
-                      index === currentIndex[boxIndex] ? "active" : ""
-                    }`}
-                    role="button"
-                    onClick={() => changeCurrentIndex(index)}
-                  ></div>
-                ))}
-              </div>
-              {videoUrl[currentIndex[boxIndex]].isVid ? (
-                <ReactPlayer
-                  width={"100%"}
-                  height="100%"
-                  url={videoUrl[currentIndex[boxIndex]].url}
-                  controls
-                  // muted
-                  playing
-                  onStart={() => {
-                    if (playing) toggle();
-                    console.log("onStart", playing);
-                  }}
-                  onEnded={() => {
-                    if (currentIndex[boxIndex] === videoUrl.length - 1) return;
-                    changeCurrentIndex(currentIndex[boxIndex] + 1);
-                  }}
-                />
-              ) : (
-                <div className="img-wrapper">
-                  <img src={videoUrl[currentIndex[boxIndex]].url} alt="" />
-                </div>
-              )}
-            </Modal>
-          )}
-          <div className="button-play-music">
-            <PlayButton
-              url={"background.mp4"}
-              setIsPlaying={setIsPlaying}
-              toggle={toggle}
-              playing={playing}
-            />
-          </div>
-          <div className="content-container">
-            <div
-              className="logo animate-charcter"
-              role="button"
-              onClick={goToHomepage}
-            >
-              VMN
-            </div>
-          </div>
-          <div className="instruction-container">
-            <h1 className="letterDrop">Scroll!</h1>
-          </div>
-          <Canvas
-            className="background"
-            onCreated={(state) => state.gl.setClearColor("#11111f")}
-            // onPointerMissed={() => alert("miss click")}
-            resize={{ scroll: false }}
-            onResize
-            dpr={window.devicePixelRatio}
-            camera={{
-              fov: 70,
-              aspect: window.innerWidth / window.innerHeight,
-              near: 0.1,
-              far: 1000,
-              position: [0, 1, 5],
-            }}
+      {isLoading && <FirstLoader />}(
+      <div className="">
+        {isModalOpen && (
+          <Modal
+            width="100%"
+            height="calc(100vh - 100px) "
+            footer={null}
+            visible={isModalOpen}
+            destroyOnClose
+            closable
+            className="modal-video"
+            onCancel={handleCloseModal}
+            centered
           >
-            {/* <PerspectiveCamera
+            <RightOutlined
+              className={`right-icon ${
+                currentIndex[boxIndex] >= videoUrl.length - 1 ? "disabled" : ""
+              }`}
+              role="button"
+              onClick={() => {
+                if (currentIndex[boxIndex] > videoUrl.length - 1) return;
+                goNextPage();
+              }}
+            />
+            <LeftOutlined
+              className={`left-icon ${
+                currentIndex[boxIndex] <= 0 ? "disabled" : ""
+              }`}
+              role="button"
+              onClick={() => {
+                if (currentIndex[boxIndex] < 0) return;
+                goPrevPage();
+              }}
+            />
+            <div className="dots-group">
+              {videoUrl.map((video, index) => (
+                <div
+                  className={`dot ${
+                    index === currentIndex[boxIndex] ? "active" : ""
+                  }`}
+                  role="button"
+                  onClick={() => changeCurrentIndex(index)}
+                ></div>
+              ))}
+            </div>
+            {videoUrl[currentIndex[boxIndex]].isVid ? (
+              <ReactPlayer
+                width={"100%"}
+                height="100%"
+                url={videoUrl[currentIndex[boxIndex]].url}
+                controls
+                // muted
+                playing
+                onStart={() => {
+                  if (playing) toggle();
+                  console.log("onStart", playing);
+                }}
+                onEnded={() => {
+                  if (currentIndex[boxIndex] === videoUrl.length - 1) return;
+                  changeCurrentIndex(currentIndex[boxIndex] + 1);
+                }}
+              />
+            ) : (
+              <div className="img-wrapper">
+                <img src={videoUrl[currentIndex[boxIndex]].url} alt="" />
+              </div>
+            )}
+          </Modal>
+        )}
+        <div className="button-play-music">
+          <PlayButton
+            url={"background.mp4"}
+            setIsPlaying={setIsPlaying}
+            toggle={toggle}
+            playing={playing}
+          />
+        </div>
+        <div className="content-container">
+          <div
+            className="logo animate-charcter"
+            role="button"
+            onClick={goToHomepage}
+          >
+            VMN
+          </div>
+        </div>
+        <div className="instruction-container">
+          <h1 className="letterDrop">Scroll!</h1>
+        </div>
+        <Canvas
+          className="background"
+          onCreated={(state) => state.gl.setClearColor("#11111f")}
+          // onPointerMissed={() => alert("miss click")}
+          resize={{ scroll: false }}
+          onResize
+          dpr={window.devicePixelRatio}
+          camera={{
+            fov: 70,
+            aspect: window.innerWidth / window.innerHeight,
+            near: 0.1,
+            far: 1000,
+            position: [0, 1, 5],
+          }}
+        >
+          {/* <PerspectiveCamera
             fov={60}
             aspect={window.innerWidth / window.innerHeight}
             near={0.1}
@@ -374,31 +581,31 @@ function Recap() {
             position={[0, 0, 1]}
             rotation={[1.16, -0.12, 0.27]}
           /> */}
-            {/* <directionalLight color={0xffeedd} position={[0, 0, 1]} /> */}
-            {/* <pointLight position={[0, 2, 10]} /> */}
-            {/* <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} /> */}
-            <Suspense fallback={<Loader />}>
-              {/* <color attach="background" args={[255, 255, 255]}/> */}
-              {/* <CloudSky /> */}
+          {/* <directionalLight color={0xffeedd} position={[0, 0, 1]} /> */}
+          {/* <pointLight position={[0, 2, 10]} /> */}
+          {/* <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} /> */}
+          <Suspense fallback={null}>
+            {/* <color attach="background" args={[255, 255, 255]}/> */}
+            {/* <CloudSky /> */}
 
-              <Sky
-                distance={45000} // Camera distance (default=450000)
-                sunPosition={[5, 1, 8]} // Sun position normal (defaults to inclination and azimuth if not set)
-                inclination={1} // Sun elevation angle from 0 to 1 (default=0)
-                azimuth={0.25} // Sun rotation around the Y axis from 0 to 1 (default=0.25)
-                // {...props} // All three-stdlib/objects/Sky props are valid
-              />
-              <pointLight
-                visible
-                intensity={1}
-                debug
-                color="white"
-                position={[0, 200, 0]}
-                rotation={[Math.PI / -2.5, 0, 0]}
-              />
-              {/* <ambientLight color={0xffffff} /> */}
-              {/* <Environment preset={null} background="white" /> */}
-              {/* <iframe
+            <Sky
+              distance={45000} // Camera distance (default=450000)
+              sunPosition={[5, 1, 8]} // Sun position normal (defaults to inclination and azimuth if not set)
+              inclination={1} // Sun elevation angle from 0 to 1 (default=0)
+              azimuth={0.25} // Sun rotation around the Y axis from 0 to 1 (default=0.25)
+              // {...props} // All three-stdlib/objects/Sky props are valid
+            />
+            <pointLight
+              visible
+              intensity={1}
+              debug
+              color="white"
+              position={[0, 200, 0]}
+              rotation={[Math.PI / -2.5, 0, 0]}
+            />
+            {/* <ambientLight color={0xffffff} /> */}
+            {/* <Environment preset={null} background="white" /> */}
+            {/* <iframe
             width="100%"
             height="300"
             scrolling="no"
@@ -425,81 +632,81 @@ function Recap() {
               Sài Gòn - Y Vân (VMN ft. Lâm Thorn)
             </a>
           </div> */}
-              {createBox(
-                {
-                  greyImg: image2,
-                  img: pic2,
-                  text: "Super prettyyy!",
-                  videoUrl: [
-                    { url: "video1.mp4", isVid: true },
-                    { url: "video4.mp4", isVid: true },
-                    { url: "video5.mp4", isVid: true },
-                  ],
-                },
-                {
-                  greyImg: image,
-                  img: pic5,
-                  text: "Super dancerrr!",
-                  videoUrl: [{ url: "video3.mp4", isVid: true }],
-                },
-                {
-                  greyImg: pic3,
-                  img: pic3,
-                  text: "Super vocal!!",
-                  videoUrl: [
-                    {
-                      url: "music3.mp4",
-                      isVid: true,
-                    },
-                    {
-                      url: "music4.mp4",
-                      isVid: true,
-                    },
-                    {
-                      url: "music1.mp4",
-                      isVid: true,
-                    },
-                    {
-                      url: "music2.mp4",
-                      isVid: true,
-                    },
-                    {
-                      url: "https://api.soundcloud.com/tracks/712170220&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
-                      isVid: true,
-                    },
-                  ],
-                },
-                {
-                  greyImg: image,
-                  img: profilePic,
-                  text: "Siucaphocba!! !",
-                  videoUrl: [
-                    { url: "pic-4.jpg", isVid: false },
-                    { url: "pic-6.jpg", isVid: false },
-                  ],
-                  imgUrl: pic5,
-                  isPic: true,
-                },
-                {
-                  text: "Siucaphocba!! !",
-                  videoUrl: ["pic-4.jpg"],
-                  imgUrl: pic5,
-                  isPic: true,
-                  isDivOnly: true,
-                }
-              )}
-              <Stars
-                radius={100} // Radius of the inner sphere (default=100)
-                depth={100} // Depth of area where stars should fit (default=50)
-                count={5000} // Amount of stars (default=5000)
-                factor={4} // Size factor (default=4)
-                saturation={0} // Saturation 0-1 (default=0)
-                fade // Faded dots (default=false)\
-              />
-            </Suspense>
-          </Canvas>
-        </div>
-      )}
+            {createBox(
+              {
+                greyImg: image2,
+                img: pic2,
+                text: "Super prettyyy!",
+                videoUrl: [
+                  { url: "video1.mp4", isVid: true },
+                  { url: "video4.mp4", isVid: true },
+                  { url: "video5.mp4", isVid: true },
+                ],
+              },
+              {
+                greyImg: image,
+                img: pic5,
+                text: "Super dancerrr!",
+                videoUrl: [{ url: "video3.mp4", isVid: true }],
+              },
+              {
+                greyImg: pic3,
+                img: pic3,
+                text: "Super vocal!!",
+                videoUrl: [
+                  {
+                    url: "music3.mp4",
+                    isVid: true,
+                  },
+                  {
+                    url: "music4.mp4",
+                    isVid: true,
+                  },
+                  {
+                    url: "music1.mp4",
+                    isVid: true,
+                  },
+                  {
+                    url: "music2.mp4",
+                    isVid: true,
+                  },
+                  {
+                    url: "https://api.soundcloud.com/tracks/712170220&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true",
+                    isVid: true,
+                  },
+                ],
+              },
+              {
+                greyImg: image,
+                img: profilePic,
+                text: "Siucaphocba!! !",
+                videoUrl: [
+                  { url: "pic-4.jpg", isVid: false },
+                  { url: "pic-6.jpg", isVid: false },
+                ],
+                imgUrl: pic5,
+                isPic: true,
+              },
+              {
+                text: "Siucaphocba!! !",
+                videoUrl: ["pic-4.jpg"],
+                imgUrl: pic5,
+                isPic: true,
+                isDivOnly: true,
+              }
+            )}
+            <Stars
+              radius={100} // Radius of the inner sphere (default=100)
+              depth={100} // Depth of area where stars should fit (default=50)
+              count={5000} // Amount of stars (default=5000)
+              factor={4} // Size factor (default=4)
+              saturation={0} // Saturation 0-1 (default=0)
+              fade // Faded dots (default=false)\
+            />
+          </Suspense>
+        </Canvas>
+      </div>
+      )
     </div>
   );
 }
@@ -523,6 +730,7 @@ function Box({
   lastIndex,
   setWarning,
   setSecretModalOpen,
+  setIsModalLoading,
   ...props
 }) {
   const boxRef = useRef();
@@ -769,7 +977,7 @@ function Box({
                 options={{
                   strings: [
                     "Content from this point onward...",
-                    "is only for the right person...",
+                    "is not for everyone...",
                     "Do you want to proceed?",
                   ],
                   autoStart: true,
@@ -783,7 +991,9 @@ function Box({
               <Button
                 type="primary"
                 className="button"
-                onClick={() => setSecretModalOpen(true)}
+                onClick={() => {
+                  setSecretModalOpen(true);
+                }}
               >
                 yes
               </Button>

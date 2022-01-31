@@ -10,12 +10,14 @@
 
 .blackboard {
   position: relative;
+  overflow: hidden;
+  margin: -5px !important;
   width: 640px;
   margin: 0;
-  border: tan solid 12px;
-  border-top: #bda27e solid 12px;
-  border-left: #b19876 solid 12px;
-  border-bottom: #c9ad86 solid 12px;
+  border: tan solid 6px;
+  border-top: #bda27e solid 6px;
+  border-left: #b19876 solid 6px;
+  border-bottom: #c9ad86 solid 6px;
   box-shadow: 0px 0px 6px 5px rgba(58, 18, 13, 0), 0px 0px 0px 2px #c2a782,
     0px 0px 0px 4px #a58e6f, 3px 4px 8px 5px rgba(0, 0, 0, 0.5);
   background-image: radial-gradient(
@@ -36,10 +38,13 @@
     ),
     radial-gradient(circle at right, #111, rgba(51, 51, 51, 1));
   background-color: #333;
+  border-radius: 18px;
 }
 
 .blackboard:before {
   box-sizing: border-box;
+  border-radius: 18px;
+
   display: block;
   position: absolute;
   width: 100%;
@@ -65,7 +70,8 @@
     );
   border: #2c2c2c solid 2px;
   content: "";
-  font-family: "Permanent Marker", cursive;
+  // font-family: "Permanent Marker", cursive;
+  font-family: "Mochiy Pop P One", sans-serif;
   font-size: 2.2em;
   color: rgba(238, 238, 238, 0.7);
   text-align: center;
@@ -73,9 +79,10 @@
 }
 
 .form-label {
-  font-size: 2.2em;
+  font-size: 1.8em;
 
-  font-family: "Permanent Marker", cursive;
+  // font-family: "Permanent Marker", cursive;
+  font-family: "Mochiy Pop P One", sans-serif;
   color: rgba(238, 238, 238, 0.7);
   padding: 20px 20px 0 20px;
 }
@@ -91,8 +98,9 @@ p {
 
 label {
   vertical-align: middle;
-  font-family: "Permanent Marker", cursive;
-  font-size: 1.6em;
+  // font-family: "Permanent Marker", cursive;
+  font-family: "Mochiy Pop P One", sans-serif;
+  font-size: 1.3em;
   color: rgba(238, 238, 238, 0.7);
 }
 
@@ -106,7 +114,8 @@ textarea {
   padding-left: 10px;
   background: none;
   border: none;
-  font-family: "Permanent Marker", cursive;
+  // font-family: "Permanent Marker", cursive;
+  font-family: "Mochiy Pop P One", sans-serif;
   font-size: 1.6em;
   color: rgba(238, 238, 238, 0.8);
   line-height: 0.6em;
@@ -126,15 +135,17 @@ div.submit-button {
   color: rgba(238, 238, 238, 0.7);
   line-height: 1em;
   padding: 0;
-  font-size: 1.6em;
-  font-family: "Permanent Marker", cursive;
+  font-size: 1.3em;
+  // font-family: "Permanent Marker", cursive;
+  font-family: "Mochiy Pop P One", sans-serif;
+
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* Standard */
   transition: all 0.3s ease;
-  &:active{
-      transform: scaleY(1.2);
+  &:active {
+    transform: scaleY(1.2);
   }
 }
 

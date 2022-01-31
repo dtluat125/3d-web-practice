@@ -138,7 +138,30 @@ button.active {
   width: 100%;
   min-height: 100vh;
 }
-@media (max-height: 928px) {
+@media (max-height: 900px) {
+  .profile-picture img {
+    height: 13rem;
+  }
+  .circle {
+    width: 13rem;
+    height: 13rem;
+  }
+  .purchase {
+    margin-top: 4rem;
+  }
+  .info h3 {
+    font-size: 1rem;
+    padding: 2rem 0rem;
+  }
+  .card {
+    min-height: 90vh;
+  }
+  h2 {
+    margin-bottom: 0.2rem;
+  }
+}
+
+@media (max-height: 700px) {
   .profile-picture img {
     height: 10rem;
   }

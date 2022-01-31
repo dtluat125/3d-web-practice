@@ -55,21 +55,38 @@ function SecretSection(props) {
     }
     setIsPrev(true);
   }
+  const sleep = (milliseconds) => {
+    return new Promise((resolve) => setTimeout(resolve, milliseconds));
+  };
   useEffect(() => {
     const zIndexArr = zIndex.slice();
     let breakPoint = 0;
-    if (flipState.length > 0) {
-      for (let i = 0; flipState[i] === true; i++) {
-        zIndexArr.splice(i, 1, i + data.length);
-        if (flipState[i + 1] === false) breakPoint = i + 1;
+    async function flipManagement() {
+      if (flipState.length > 0) {
+        for (let i = 0; flipState[i] === true; i++) {
+          zIndexArr.splice(i, 1, i + data.length);
+          if (flipState[i + 1] === false) breakPoint = i + 1;
+        }
+        for (
+          let i = breakPoint;
+          flipState[i] === false && i < data.length;
+          i++
+        ) {
+          const j = i - breakPoint;
+          if (isPrev) zIndexArr.splice(i, 1, breakPoint + data.length - j - 1);
+          else {
+            zIndexArr.splice(i, 1, breakPoint + data.length - j - 2);
+            setTimeout(
+              zIndexArr.splice(i, 1, breakPoint + data.length - j - 1),
+              100
+            );
+            await sleep(100);
+          }
+        }
       }
-      for (let i = breakPoint; flipState[i] === false && i < data.length; i++) {
-        const j = i - breakPoint;
-        if (isPrev) zIndexArr.splice(i, 1, breakPoint + data.length - j - 1);
-        else zIndexArr.splice(i, 1, breakPoint + data.length - j - 2);
-      }
+      setZIndex(zIndexArr);
     }
-    setZIndex(zIndexArr);
+    flipManagement();
   }, [flipState]);
 
   return (
