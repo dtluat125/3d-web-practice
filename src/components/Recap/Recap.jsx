@@ -167,7 +167,7 @@ function Recap() {
         setShowSecretContent(true);
       }, 500);
   }, [loggedIn]);
-  const pass = '17082002'
+  const pass = "17082002";
   const onSubmit = () => {
     if (pass === password) {
       setLoggedIn(true);
@@ -647,7 +647,10 @@ function Recap() {
                 greyImg: image,
                 img: pic5,
                 text: "Super dancerrr!",
-                videoUrl: [{ url: "video3.mp4", isVid: true }],
+                videoUrl: [
+                  { url: "video3.mp4", isVid: true },
+                  { url: "video6.mp4", isVid: true },
+                ],
               },
               {
                 greyImg: pic3,
